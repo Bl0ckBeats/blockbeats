@@ -46,19 +46,21 @@ const DefaultActions = ({ vertical = false }: { vertical?: boolean }) => {
     <div
       style={{
         display: 'flex',
+        flex: 1,
         flexDirection: vertical ? 'column' : 'row',
       }}
     >
       <Link to={`/`}>
-        <Button className="app-btn">Explore</Button>
+        <Button className="app-btn">V1 Drop</Button>
       </Link>
-      <Link to={`/artworks`}>
-        <Button className="app-btn">
-          {connected ? 'My Items' : 'Artworks'}
-        </Button>
+      <Link to={`/`}>
+        <Button className="app-btn">About</Button>
       </Link>
-      <Link to={`/artists`}>
-        <Button className="app-btn">Creators</Button>
+      <Link to={`/`}>
+        <Button className="app-btn">Roadmap</Button>
+      </Link>
+      <Link to={`/`}>
+        <Button className="app-btn">FAQ</Button>
       </Link>
     </div>
   );
@@ -78,20 +80,23 @@ const MetaplexMenu = () => {
           overlay={
             <Menu>
               <Menu.Item>
+                <Link className="test" to={`/`}>
+                  <Button className="app-btn">V1 Drop</Button>
+                </Link>
+              </Menu.Item>
+              <Menu.Item>
                 <Link to={`/`}>
-                  <Button className="app-btn">Explore</Button>
+                  <Button className="app-btn">About</Button>
                 </Link>
               </Menu.Item>
               <Menu.Item>
-                <Link to={`/artworks`}>
-                  <Button className="app-btn">
-                    {connected ? 'My Items' : 'Artworks'}
-                  </Button>
+                <Link to={`/`}>
+                  <Button className="app-btn">Roadmap</Button>
                 </Link>
               </Menu.Item>
               <Menu.Item>
-                <Link to={`/artists`}>
-                  <Button className="app-btn">Creators</Button>
+                <Link to={`/`}>
+                  <Button className="app-btn">FAQ</Button>
                 </Link>
               </Menu.Item>
             </Menu>
@@ -110,12 +115,19 @@ export const AppBar = () => {
 
   return (
     <>
-      <div className="app-left app-bar-box">
-        {window.location.hash !== '#/analytics' && <Notifications />}
-        <div className="divider" />
-        <MetaplexMenu />
+      <div className="app-left">
+        <img src="/blockbeats-full-logo.svg" width="274" />
       </div>
-      {!connected && <ConnectButton type="primary" />}
+      <MetaplexMenu />
+      {!connected && (
+        <div className="connect-btn">
+          <ConnectButton
+            style={{ width: 'fit-content' }}
+            className="gradient-btn"
+            type="default"
+          />
+        </div>
+      )}
       {connected && (
         <div className="app-right app-bar-box">
           <UserActions />
